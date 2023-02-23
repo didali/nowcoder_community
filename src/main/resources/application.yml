@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /nowcoder
+
+
+spring:
+  application:
+    #应用的名称，可选
+    name: nowcoder
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/nowcoder?serverTimezone=UTC
+      username: root
+      password: 562552
+  thymeleaf:
+    cache: false
+
+mybatis:
+  #设置type搜索包的路径
+  type-aliases-package: com.dida.nowcoder.entity
+  #设置mapper的扫描
+  mapper-locations: classpath:com/dida/nowcoder/mapper/*.xml
