@@ -12,13 +12,30 @@ spring:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/nowcoder?serverTimezone=UTC
-      username: root
-      password: 562552
+      username: ENC(2ZCNq9d4NusaBLjr2231XYDI69FpgJzh)
+      password: ENC(56aoTWjYE1TtAGKyUai60YK2nCQvHTL9)
   thymeleaf:
     cache: false
+  mail:
+    host: smtp.163.com
+    port: 465
+    username: ENC(R//S+v5cXBw8yMvcaE8yUhy5RSW3hcjLZY9qWAoKTmd56JMknI5+DQ==)
+    password: ENC(oBD2TJdTcZ0r/LcrM1TJBk1cT4gfCduc9tSgIquG8/A=)
+    protocol: smtps
+    properties: #在发送邮件的时候采用ssl安全连接
+      mail:
+        smtp:
+          ssl:
+            enable: true
 
 mybatis:
   #设置type搜索包的路径
   type-aliases-package: com.dida.nowcoder.entity
   #设置mapper的扫描
   mapper-locations: classpath:com/dida/nowcoder/mapper/*.xml
+
+jasypt:
+  encryptor:
+    password: 123456
+    algorithm: PBEWithMD5AndDES
+
