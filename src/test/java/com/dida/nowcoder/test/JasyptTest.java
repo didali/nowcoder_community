@@ -13,10 +13,10 @@ public class JasyptTest {
 
     @Test
     public void test() {
-        String user = this.stringEncryptor.encrypt("dida_tick.163.com");
+        String user = this.stringEncryptor.encrypt("");
         System.out.println(user);
 
-        String  password = this.stringEncryptor.encrypt("mythology562H");
+        String  password = this.stringEncryptor.encrypt("");
         System.out.println(password);
     }
     // DyYxvyNFXrq4kcX/lhsOX3SXYBYV0DWu
