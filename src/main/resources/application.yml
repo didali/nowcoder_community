@@ -12,15 +12,15 @@ spring:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/nowcoder?serverTimezone=UTC
-      username: ENC(2ZCNq9d4NusaBLjr2231XYDI69FpgJzh)
-      password: ENC(56aoTWjYE1TtAGKyUai60YK2nCQvHTL9)
+      username: ENC(49hy2x4Wk6cSc9hOHkpZF8KpTB/UjsvB)
+      password: ENC(VjEC3+b+xLwe5sRhD+bLudk2RMUZP+4b)
   thymeleaf:
     cache: false
   mail:
     host: smtp.163.com
     port: 465
-    username: ENC(gbkCvVo3r2pPqWqX69eaWsay+kldQDfFTJ2xijQzb0UnbzE1jyjGBA==)
-    password: ENC(wMi0grVHa7qTboorvWYj9jB4FArMkUcLhi5I8pTnCmutJvROnlx+sw==)
+    username: ENC(LuhjyJQvkrehrKp9/C7+tze36XrP08kMl4L25SgH14OJrU8RnLdP4A==)
+    password: ENC(6fxUyuNxj3mxj1E5m+RZMg9prJ6svwKNZozjdnCSwzUZIMjlo8EI2g==)
     protocol: smtps
     properties: #在发送邮件的时候采用ssl安全连接
       mail:
@@ -38,4 +38,10 @@ jasypt:
   encryptor:
     password: 123456
     algorithm: PBEWithMD5AndDES
+
+#配置网站域名，这里暂用本机ip地址(都是自己取得key)
+community:
+  path:
+    domain: http://localhost:8080
+
 

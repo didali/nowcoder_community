@@ -6,15 +6,25 @@ import java.util.Date;
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    //id
     private int id;
+    //用户名
     private String username;
+    //密码
     private String password;
+    //随机数
     private String salt;
+    //邮箱
     private String email;
+    //类型
     private int type;
+    //状态
     private int status;
+    //激活码
     private String activationCode;
+    //
     private String headerUrl;
+    //创建时间
     private Date createTime;
 
     public int getId() {

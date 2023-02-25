@@ -29,7 +29,7 @@ public class MailTest {
         String process = templateEngine.process("/mail/demo", context);
         System.out.println(process);
 
-        mailClient.sendMail("xxx@qq.com", "HTML_TEST", process);
+        mailClient.sendMail("22", "HTML_TEST", process);
 
     }
 }

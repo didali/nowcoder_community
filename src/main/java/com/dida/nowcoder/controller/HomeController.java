@@ -3,8 +3,8 @@ package com.dida.nowcoder.controller;
 import com.dida.nowcoder.entity.DiscussPost;
 import com.dida.nowcoder.entity.Page;
 import com.dida.nowcoder.entity.User;
-import com.dida.nowcoder.service.DiscussPostService;
-import com.dida.nowcoder.service.UserService;
+import com.dida.nowcoder.service.impl.DiscussPostServiceImpl;
+import com.dida.nowcoder.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +19,10 @@ import java.util.Map;
 public class HomeController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @Autowired
-    private DiscussPostService discussPostService;
+    private DiscussPostServiceImpl discussPostServiceImpl;
 
     /**
      * 获取页面评论
@@ -36,16 +36,16 @@ public class HomeController {
             方法调用之前，springMVC会自动实例化Model和Page，并将Page注入给Model
             所以，在thymeleaf中可以直接访问Page对象当中的数据
          */
-        page.setRows(discussPostService.getDiscussPostsRows(0));
+        page.setRows(discussPostServiceImpl.getDiscussPostsRows(0));
         page.setPath("/index");
 
-        List<DiscussPost> list = discussPostService.getDiscussPosts(0, page.getOffset(), page.getLimit());
+        List<DiscussPost> list = discussPostServiceImpl.getDiscussPosts(0, page.getOffset(), page.getLimit());
         List<Map<String, Object>> discussPosts = new ArrayList<>();
 
         if (list != null) {
             for (DiscussPost post : list) {
                 Map<String, Object> map = new HashMap<>();
-                User user = userService.getUserById(post.getUserId());
+                User user = userServiceImpl.getUserById(post.getUserId());
 
                 map.put("post", post);
                 map.put("user", user);

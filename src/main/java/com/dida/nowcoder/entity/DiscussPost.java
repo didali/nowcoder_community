@@ -14,8 +14,10 @@ public class DiscussPost implements Serializable {
 
     private String content;
 
+    //是否置顶帖标志位(1表示置顶)
     private int type;
 
+    //是否精华帖标志位(1表示精华)
     private int status;
 
     private Date createTime;

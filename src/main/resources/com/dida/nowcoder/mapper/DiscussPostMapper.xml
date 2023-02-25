@@ -7,7 +7,7 @@
     <resultMap id="discussPostMapper" type="discussPost">
         <result column="user_id" property="userId"></result>
         <result column="create_time" property="createTime"></result>
-        <result column="commentCount" property="commentCount"></result>
+        <result column="comment_count" property="commentCount"></result>
     </resultMap>
 
     <!--使用这种方式，而不是在查询当中使用select * 的区别
@@ -16,8 +16,6 @@
     <sql id="selectFields">
         id, user_id, title, content, type, status, create_time, comment_count, score
     </sql>
-    
-
     
     <select id="selectDiscussPost" resultMap="discussPostMapper">
         select <include refid="selectFields"></include>

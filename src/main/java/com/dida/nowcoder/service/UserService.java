@@ -1,16 +1,17 @@
 package com.dida.nowcoder.service;
 
-import com.dida.nowcoder.dao.UserMapper;
 import com.dida.nowcoder.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UserService {
-    @Autowired
-    public UserMapper userMapper;
+import java.util.Map;
 
-    public User getUserById(int id) {
-        return userMapper.selectById(id);
-    }
+public interface UserService {
+
+    //通过id获取user对象
+    public User getUserById(int id);
+
+    //注册
+    public Map<String, Object> register(User user);
+
+    //激活注册账号
+    public int activation(int userId, String code);
 }

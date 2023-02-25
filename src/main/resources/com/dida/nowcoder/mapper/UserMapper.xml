@@ -5,7 +5,7 @@
 <mapper namespace="com.dida.nowcoder.dao.UserMapper">
 
     <resultMap id="userMapper" type="user">
-        <result column="activation" property="activationCode"></result>
+        <result column="activation_code" property="activationCode"></result>
         <result column="create_time" property="createTime"></result>
         <result column="header_url" property="headerUrl"></result>
     </resultMap>
