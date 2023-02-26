@@ -3,6 +3,9 @@ package com.dida.nowcoder.controller;
 import com.dida.nowcoder.entity.User;
 import com.dida.nowcoder.service.UserService;
 import com.dida.nowcoder.utils.CommunityConstant;
+import com.google.code.kaptcha.Producer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,13 +13,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
 
 @Controller
 public class LoginController implements CommunityConstant {
 
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private Producer kaptchaProducer;
 
     //访问注册页面
     @GetMapping("/register")
@@ -77,5 +91,30 @@ public class LoginController implements CommunityConstant {
             model.addAttribute("target", "/index");
         }
         return "/site/operate-result";
+    }
+
+    /**
+     * 获取生成验证码图片
+     *
+     * @return 这里返回很特殊，我们返回的是一个图片，所以我们需要手动的使用Response来进行输出
+     */
+    @GetMapping("/kaptcha")
+    public void getKaptcha(HttpServletResponse response, HttpSession session) {
+        //生成验证码
+        String text = kaptchaProducer.createText();
+        //生成图片
+        BufferedImage image = kaptchaProducer.createImage(text);
+
+        //将验证码存入session
+        session.setAttribute("kaptcha", text);
+
+        //将图片输出给浏览器
+        response.setContentType("image/png");
+        try {
+            OutputStream os = response.getOutputStream();
+            ImageIO.write(image, "png", os);
+        } catch (IOException e) {
+            logger.error("响应验证码失败："+ e.getMessage());
+        }
     }
 }
