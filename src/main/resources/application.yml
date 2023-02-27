@@ -3,7 +3,6 @@ server:
   servlet:
     context-path: /nowcoder
 
-
 spring:
   application:
     #应用的名称，可选

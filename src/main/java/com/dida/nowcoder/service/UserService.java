@@ -14,4 +14,10 @@ public interface UserService {
 
     //激活注册账号
     public int activation(int userId, String code);
+
+    //登录
+    public Map<String, Object> login(String username, String password, int expiredSeconds);
+
+    //退出
+    public void logout(String ticket);
 }

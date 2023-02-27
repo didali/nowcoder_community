@@ -1,6 +1,8 @@
 package com.dida.nowcoder.service.impl;
 
+import com.dida.nowcoder.dao.LoginTicketMapper;
 import com.dida.nowcoder.dao.UserMapper;
+import com.dida.nowcoder.entity.LoginTicket;
 import com.dida.nowcoder.entity.User;
 import com.dida.nowcoder.service.UserService;
 import com.dida.nowcoder.utils.CommunityConstant;
@@ -24,6 +26,9 @@ public class UserServiceImpl implements UserService, CommunityConstant {
     private UserMapper userMapper;
 
     @Autowired
+    private LoginTicketMapper loginTicketMapper;
+
+    @Autowired
     private MailClient mailClient;
 
     @Autowired
@@ -37,6 +42,7 @@ public class UserServiceImpl implements UserService, CommunityConstant {
     @Value("${server.servlet.context-path}")
     private String contextPath;
 
+    //通过id获取
     @Override
     public User getUserById(int id) {
         return userMapper.selectById(id);
@@ -85,12 +91,12 @@ public class UserServiceImpl implements UserService, CommunityConstant {
         user.setCreateTime(new Date());
         userMapper.insertUser(user);
 
-        User registerUser = userMapper.selectByName(user.getUsername());
+        //User registerUser = userMapper.selectByName(user.getUsername());
         //激活邮件
         Context context = new Context();
         context.setVariable("email", user.getEmail());
         //规定url
-        String url = domain + contextPath + "/activation/" + registerUser.getId() + "/" + user.getActivationCode();
+        String url = domain + contextPath + "/activation/" + user.getId() + "/" + user.getActivationCode();
         context.setVariable("url", url);
         String content = templateEngine.process("/mail/activation", context);
         mailClient.sendMail(user.getEmail(), "激活账号", content);
@@ -115,4 +121,52 @@ public class UserServiceImpl implements UserService, CommunityConstant {
         }
     }
 
+    @Override
+    public Map<String, Object> login(String username, String password, int expiredSeconds) {
+        Map<String, Object> map = new HashMap<>();
+
+        //空值处理
+        if (StringUtils.isBlank(username)) {
+            map.put("usernameMsg", "用户名不能为空");
+            return map;
+        }
+        if (StringUtils.isBlank(password)) {
+            map.put("passwordMsg", "密码不能为空");
+            return map;
+        }
+
+        //验证账号
+        User user = userMapper.selectByName(username);
+        if (user == null) {
+            map.put("usernameMsg", "账号不存在，你输入的账号有误！");
+            return map;
+        }
+        if (user.getStatus() == 0) {
+            map.put("usernameMsg", "账号未激活，请在我们给您发送的邮件当中进行激活再来登录");
+            return map;
+        }
+
+        password = CommunityUtil.md5(password + user.getSalt());
+        if (user.getPassword().equals(password)) {
+            map.put("passwordMsg", "密码错误，请重新输入");
+            return map;
+        }
+
+        //登录成功，生成登陆凭证
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setUserId(user.getId());
+        loginTicket.setTicket(CommunityUtil.generateUUID());
+        loginTicket.setStatus(0);
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + expiredSeconds * 1000L));
+
+        loginTicketMapper.insertLoginTicket(loginTicket);
+
+        map.put("ticket", loginTicket.getTicket());
+        return map;
+    }
+
+    @Override
+    public void logout(String ticket) {
+        loginTicketMapper.updateStatus(ticket, 1);
+    }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dida.nowcoder.dao.LoginTicketMapper">
+
+    <resultMap id="loginTicketMapper" type="loginTicket">
+        <result column="user_id" property="userId"/>
+    </resultMap>
+
+    <insert id="insertLoginTicket" useGeneratedKeys="true" parameterType="loginTicket" keyProperty="id">
+        insert into login_ticket(user_id, ticket, status, expired)
+        values(#{userId}, #{ticket}, #{status}, #{expired});
+    </insert>
+
+    <update id="updateStatus">
+        update login_ticket
+        set status = #{status}
+        where ticket = #{ticket}
+    </update>
+
+    <select id="selectByTicket" resultMap="loginTicketMapper">
+        select id, user_id, ticket, status, expired
+        from login_ticket
+        where ticket = #{ticket}
+    </select>
+</mapper>

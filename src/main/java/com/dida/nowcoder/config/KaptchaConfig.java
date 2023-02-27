@@ -24,7 +24,7 @@ public class KaptchaConfig {
         properties.setProperty("kaptcha.textproducer.font.color", "0,0,0"); //验证码字体颜色
         properties.setProperty("kaptcha.textproducer.char.string", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"); //验证码范围
         properties.setProperty("kaptcha.textproducer.char.length", "4"); //验证码长度
-        properties.setProperty("kaptcha.noise.impl", "com.google.code.kaptcha.impl.NoNoise"); //
+        properties.setProperty("kaptcha.noise.impl", "com.google.code.kaptcha.impl.NoNoise"); //对验证码进行一定程度的干扰
 
         DefaultKaptcha kaptcha = new DefaultKaptcha();
         Config config = new Config(properties);
