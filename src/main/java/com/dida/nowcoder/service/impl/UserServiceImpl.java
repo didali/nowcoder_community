@@ -4,7 +4,6 @@ import com.dida.nowcoder.dao.LoginTicketMapper;
 import com.dida.nowcoder.dao.UserMapper;
 import com.dida.nowcoder.entity.LoginTicket;
 import com.dida.nowcoder.entity.User;
-import com.dida.nowcoder.service.UserService;
 import com.dida.nowcoder.utils.CommunityConstant;
 import com.dida.nowcoder.utils.CommunityUtil;
 import com.dida.nowcoder.utils.MailClient;
@@ -21,7 +20,7 @@ import java.util.Map;
 import java.util.Random;
 
 @Service
-public class UserServiceImpl implements UserService, CommunityConstant {
+public class UserServiceImpl implements com.dida.nowcoder.service.UserService, CommunityConstant {
     @Autowired
     private UserMapper userMapper;
 
@@ -121,6 +120,7 @@ public class UserServiceImpl implements UserService, CommunityConstant {
         }
     }
 
+    //登录
     @Override
     public Map<String, Object> login(String username, String password, int expiredSeconds) {
         Map<String, Object> map = new HashMap<>();
@@ -165,8 +165,23 @@ public class UserServiceImpl implements UserService, CommunityConstant {
         return map;
     }
 
+
+    /**
+     * 登出
+      * @param ticket 凭证
+     */
     @Override
     public void logout(String ticket) {
         loginTicketMapper.updateStatus(ticket, 1);
+    }
+
+    /**
+     * 获取用户凭证
+     * @param ticket
+     * @return 凭证
+     */
+    @Override
+    public LoginTicket getLoginTicket(String ticket) {
+        return loginTicketMapper.selectByTicket(ticket);
     }
 }

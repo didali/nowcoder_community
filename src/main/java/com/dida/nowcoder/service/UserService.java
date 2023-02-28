@@ -1,5 +1,6 @@
 package com.dida.nowcoder.service;
 
+import com.dida.nowcoder.entity.LoginTicket;
 import com.dida.nowcoder.entity.User;
 
 import java.util.Map;
@@ -20,4 +21,7 @@ public interface UserService {
 
     //退出
     public void logout(String ticket);
+
+    //查询凭证
+    public LoginTicket getLoginTicket(String ticket);
 }
