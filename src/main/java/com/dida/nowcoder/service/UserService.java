@@ -24,4 +24,10 @@ public interface UserService {
 
     //查询凭证
     public LoginTicket getLoginTicket(String ticket);
+
+    //修改密码
+    public int updatePassword(String email, String password);
+
+    //修改头像
+    public int updateHeader(int userId, String headerUrl);
 }

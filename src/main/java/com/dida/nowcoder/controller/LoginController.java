@@ -51,6 +51,12 @@ public class LoginController implements CommunityConstant {
         return "/site/login";
     }
 
+    //访问忘记密码页面
+    @GetMapping("/forget")
+    public String forgetPassword() {
+        return "/site/forget";
+    }
+
 
     /**
      * 注册功能
@@ -166,10 +172,36 @@ public class LoginController implements CommunityConstant {
         }
     }
 
+    /**
+     * 登出
+     * @param ticket 凭证
+     * @return 重定向页面
+     */
     @GetMapping("/logout")
     public String logout(@CookieValue("ticket") String ticket) {
         userService.logout(ticket);
         //我们这里重定向为login，但是我们存在两个login请求，其中一个是get请求，一个是post请求，这里默认会是get请求
         return "redirect:/login";
     }
+
+/*
+    @GetMapping("")
+    public String getCaptcha() {
+        return null;
+    }
+    *//**
+     * 修改密码
+     * @param email
+     * @param password
+     * @return
+     *//*
+    public String updatePassword(String email, String password) {
+        userService.updatePassword(email, password);
+        return null;
+    }
+
+    @GetMapping("/demo")
+    public String demo() {
+        return "/mail/demo";
+    }*/
 }
