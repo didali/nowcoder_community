@@ -1,5 +1,6 @@
 package com.dida.nowcoder.config;
 
+import com.dida.nowcoder.interceptor.LoginRequiredInterceptor;
 import com.dida.nowcoder.interceptor.LoginTicketInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private LoginTicketInterceptor loginTicketInterceptor;
 
+    @Autowired
+    private LoginRequiredInterceptor loginRequiredInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
@@ -21,7 +25,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/**/*.js",
                         "/**/*.png",
                         "/**/*.jpg,",
-                        "/**/*.jpeg");
+                        "/**/*.jpeg"
+                );
+
+        registry.addInterceptor(loginRequiredInterceptor)
+                .excludePathPatterns(
+                        "/**/*.css",
+                        "/**/*.js",
+                        "/**/*.png",
+                        "/**/*.jpg,",
+                        "/**/*.jpeg"
+                );
     }
 }
 

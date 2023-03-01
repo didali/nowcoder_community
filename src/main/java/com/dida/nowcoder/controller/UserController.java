@@ -1,5 +1,6 @@
 package com.dida.nowcoder.controller;
 
+import com.dida.nowcoder.annotation.LoginRequired;
 import com.dida.nowcoder.entity.User;
 import com.dida.nowcoder.service.UserService;
 import com.dida.nowcoder.utils.CommunityUtil;
@@ -50,6 +51,7 @@ public class UserController {
      *
      * @return 返回账号设置页面
      */
+    @LoginRequired
     @GetMapping("/setting")
     public String getUserSettingPage() {
         return "/site/setting";
@@ -62,6 +64,7 @@ public class UserController {
      * @param model       模型
      * @return
      */
+    @LoginRequired
     @PostMapping("/upload")
     public String uploadHeader(MultipartFile headerImage, Model model) {
         if (headerImage == null) {
@@ -94,6 +97,11 @@ public class UserController {
         return "redirect:/index";
     }
 
+    /**
+     * 获取用户头像
+     * @param fileName 头像文件名
+     * @param response
+     */
     @GetMapping("/header/{fileName}")
     public void getHeader(@PathVariable("fileName") String fileName, HttpServletResponse response) {
         //服务器存放路径
