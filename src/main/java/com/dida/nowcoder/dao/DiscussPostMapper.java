@@ -15,4 +15,6 @@ public interface DiscussPostMapper {
     //查询帖子的行数
     //@Param这个注解是用于给参数取别名的，当只有一个参数，并且在if标签当中使用的话，则必须加上别名
     int selectDiscussPostRows(@Param("userId") int userId);
+
+    int insertDiscussPost(DiscussPost discussPost);
 }
