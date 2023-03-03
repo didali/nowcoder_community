@@ -14,4 +14,7 @@ public interface DiscussPostService {
 
     //发布帖子
     public int addDiscussPost(DiscussPost discussPost);
+
+    //查询帖子详情
+    public DiscussPost getDiscussPostById(int id);
 }
