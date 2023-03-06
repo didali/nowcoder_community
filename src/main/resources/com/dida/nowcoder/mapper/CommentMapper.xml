@@ -5,8 +5,14 @@
 <mapper namespace="com.dida.nowcoder.dao.CommentMapper">
 
     <sql id="selectField">
-        id, user_id, entity_id, target_id, content, status, create_time
+        id
+        , user_id, entity_id, target_id, content, status, create_time
     </sql>
+    <sql id="insertField">
+        user_id
+        , entity_id, target_id, content, status, create_time
+    </sql>
+
 
     <resultMap id="commentMapper" type="comment">
         <result column="user_id" property="userId"/>
@@ -16,8 +22,14 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
+    <insert id="insertComment">
+        insert into comment(<include refid="insertField"></include>)
+        values(#{userId}, #{entityType}, #{entityId}, #{targetId}, #{content}, #{status}, #{createTime})
+    </insert>
+
     <select id="selectCommentsByEntity" resultMap="commentMapper">
-        select <include refid="selectField"></include>
+        select
+        <include refid="selectField"></include>
         from comment
         where status = 0
         and entity_type = #{entityType}
@@ -30,7 +42,7 @@
         select count(id)
         from comment
         where status = 0
-        and entity_type = #{entityType}
-        and entity_id = #{entityId}
+          and entity_type = #{entityType}
+          and entity_id = #{entityId}
     </select>
 </mapper>

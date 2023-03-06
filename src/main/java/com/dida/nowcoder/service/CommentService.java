@@ -11,4 +11,7 @@ public interface CommentService {
 
     //查询数据的条目树
     public int getCountByEntity(int entityType, int entityId);
+
+    //添加评论
+    public int addComment(Comment comment);
 }
