@@ -40,7 +40,7 @@
         </if>
     </select>
 
-    <insert id="insertDiscussPost" parameterType="discussPost">
+    <insert id="insertDiscussPost" parameterType="discussPost" keyProperty="id" useGeneratedKeys="true">
         insert into  discuss_post(<include refid="insertFields"></include>)
         values (#{userId}, #{title}, #{content}, #{type}, #{status}, #{createTime}, #{commentCount}, #{score})
     </insert>

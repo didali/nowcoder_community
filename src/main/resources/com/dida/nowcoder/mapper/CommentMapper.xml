@@ -5,12 +5,10 @@
 <mapper namespace="com.dida.nowcoder.dao.CommentMapper">
 
     <sql id="selectField">
-        id
-        , user_id, entity_id, target_id, content, status, create_time
+        id, user_id, entity_type, entity_id, target_id, content, status, create_time
     </sql>
     <sql id="insertField">
-        user_id
-        , entity_id, target_id, content, status, create_time
+        user_id, entity_type, entity_id, target_id, content, status, create_time
     </sql>
 
 
@@ -22,7 +20,7 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
-    <insert id="insertComment">
+    <insert id="insertComment" parameterType="comment" keyProperty="id" useGeneratedKeys="true">
         insert into comment(<include refid="insertField"></include>)
         values(#{userId}, #{entityType}, #{entityId}, #{targetId}, #{content}, #{status}, #{createTime})
     </insert>

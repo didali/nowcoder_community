@@ -6,12 +6,16 @@ import java.util.Date;
 public class DiscussPost implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    //帖子id
     private int id;
 
+    //发布帖子的用户id
     private int userId;
 
+    //帖子标题
     private String title;
 
+    //帖子内容
     private String content;
 
     //是否置顶帖标志位(1表示置顶)
@@ -20,6 +24,7 @@ public class DiscussPost implements Serializable {
     //是否精华帖标志位(1表示精华)
     private int status;
 
+    //帖子创建时间
     private Date createTime;
 
     private int commentCount;

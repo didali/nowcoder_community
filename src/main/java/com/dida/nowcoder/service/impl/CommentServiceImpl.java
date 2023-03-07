@@ -53,8 +53,9 @@ public class CommentServiceImpl implements CommentService, CommunityConstant {
 
         //更新帖子的评论数量
         if (comment.getEntityType() == ENTITY_TYPE_POST) {
-
+            int count = commentMapper.selectCountByEntity(comment.getEntityType(), comment.getEntityId());
+            discussPostService.updateCommentCount(comment.getEntityId(), count);
         }
-        return 0;
+        return rows;
     }
 }
