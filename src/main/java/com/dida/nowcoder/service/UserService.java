@@ -10,6 +10,9 @@ public interface UserService {
     //通过id获取user对象
     public User getUserById(int id);
 
+    //通过用户名获取对象
+    public User getUserByName(String name);
+
     //注册
     public Map<String, Object> register(User user);
 

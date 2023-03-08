@@ -48,6 +48,11 @@ public class UserServiceImpl implements UserService, CommunityConstant {
         return userMapper.selectById(id);
     }
 
+    @Override
+    public User getUserByName(String name) {
+        return userMapper.selectByName(name);
+    }
+
     //注册
     @Override
     public Map<String, Object> register(User user) {

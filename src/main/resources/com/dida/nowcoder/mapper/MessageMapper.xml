@@ -14,6 +14,10 @@
         id, from_id, to_id, conversation_id, content, status, create_time
     </sql>
 
+    <sql id="insertField">
+        from_id, to_id, conversation_id, content, status, create_time
+    </sql>
+
     <select id="selectConversations" resultMap="messageMapper">
         select <include refid="selectField"></include>
         from message
@@ -70,5 +74,18 @@
         </if>
     </select>
 
+    <insert id="insertMessage" parameterType="message" keyProperty="id" useGeneratedKeys="true">
+        insert into message(<include refid="insertField"></include>)
+        values (#{fromId}, #{toId}, #{conversationId}, #{content}, #{status}, #{createTime})
+    </insert>
+
+    <update id="updateStatus">
+        update message
+        set status = #{status}
+        where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
 
 </mapper>

@@ -20,4 +20,10 @@ public interface MessageService {
 
     //获取未读的消息数量
     int getLetterUnreadCount(int userId, String conversationId);
+
+    //添加一条消息
+    int addMessage(Message message);
+
+    //读取消息并改变消息状态
+    int readMessage(List<Integer> ids);
 }
