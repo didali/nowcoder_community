@@ -2,8 +2,10 @@ package com.dida.nowcoder.test;
 
 import com.dida.nowcoder.dao.DiscussPostMapper;
 import com.dida.nowcoder.dao.LoginTicketMapper;
+import com.dida.nowcoder.dao.MessageMapper;
 import com.dida.nowcoder.entity.DiscussPost;
 import com.dida.nowcoder.entity.LoginTicket;
+import com.dida.nowcoder.entity.Message;
 import org.junit.jupiter.api.Test;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.slf4j.Logger;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +29,9 @@ public class MapperTest {
 
     @Autowired
     LoginTicketMapper loginTicketMapper;
+
+    @Resource
+    MessageMapper messageMapper;
 
     @Test
     public void testSelectPost() {
@@ -69,7 +75,25 @@ public class MapperTest {
     }
 
     @Test
-    public void textTime() {
+    public void testTime() {
         System.out.println(new Date(System.currentTimeMillis() + 86400));
+    }
+
+    @Test
+    public void testMessageMapper() {
+        //查询当前用户的会话列表
+        List<Message> messages = messageMapper.selectConversations(111, 0, 20);
+
+        //查询当前用户的会话数量
+        int i = messageMapper.selectConversationCount(151);
+
+        //查询某个会话所包含的私信列表
+        List<Message> messages1 = messageMapper.selectLetters("111_112", 0, 10);
+
+        //查询某个会话所包含的私信数量
+        int i1 = messageMapper.selectLetterCount("111_112");
+
+        //查询未读的消息数量
+        int i2 = messageMapper.selectLetterUnreadCount(131, "111_131");
     }
 }

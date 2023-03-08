@@ -19,6 +19,4 @@ public class JasyptTest {
         String  password = this.stringEncryptor.encrypt("");
         System.out.println(password);
     }
-    // DyYxvyNFXrq4kcX/lhsOX3SXYBYV0DWu
-    // lYLpLf3WEobBUJsmUFv79jVVXDwjJs+z
 }

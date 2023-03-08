@@ -1,9 +1,11 @@
 package com.dida.nowcoder.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 //评论
-public class Comment {
+public class Comment implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     //评论id
     private int id;
