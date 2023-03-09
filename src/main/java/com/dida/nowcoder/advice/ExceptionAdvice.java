@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+//捕获并处理Controller层出现的异常
 @ControllerAdvice(annotations = Controller.class)
 public class ExceptionAdvice {
 
