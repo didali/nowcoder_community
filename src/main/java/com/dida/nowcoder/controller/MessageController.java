@@ -65,7 +65,6 @@ public class MessageController {
         return ids;
     }
 
-
     //消息列表
     @GetMapping("/letter/list")
     public String getLetterList(Model model, Page page) {
