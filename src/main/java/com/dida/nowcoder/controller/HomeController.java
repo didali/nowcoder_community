@@ -4,25 +4,30 @@ import com.dida.nowcoder.entity.DiscussPost;
 import com.dida.nowcoder.entity.Page;
 import com.dida.nowcoder.entity.User;
 import com.dida.nowcoder.service.DiscussPostService;
+import com.dida.nowcoder.service.LikeService;
 import com.dida.nowcoder.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.dida.nowcoder.utils.CommunityConstant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-public class HomeController {
+public class HomeController implements CommunityConstant {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private DiscussPostService discussPostService;
+
+    @Resource
+    private LikeService likeService;
 
     /**
      * 获取页面评论
@@ -49,6 +54,10 @@ public class HomeController {
 
                 map.put("post", post);
                 map.put("user", user);
+
+                //查询帖子获赞情况
+                long likeCount = likeService.getEntityLikeCount(ENTITY_TYPE_POST, post.getId());
+                map.put("likeCount", likeCount);
 
                 discussPosts.add(map);
             }
