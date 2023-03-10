@@ -2,6 +2,7 @@ package com.dida.nowcoder.controller;
 
 import com.dida.nowcoder.annotation.LoginRequired;
 import com.dida.nowcoder.entity.User;
+import com.dida.nowcoder.service.LikeService;
 import com.dida.nowcoder.service.UserService;
 import com.dida.nowcoder.utils.CommunityUtil;
 import com.dida.nowcoder.utils.HostHolder;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,11 +41,14 @@ public class UserController {
     @Value("${server.servlet.context-path}")
     private String contextPath;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private HostHolder hostHolder;
+
+    @Resource
+    private LikeService likeService;
 
 
     /**
@@ -130,5 +135,30 @@ public class UserController {
             logger.error("读取头像失败：" + e.getMessage());
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 用户个人信息页面
+     *
+     * @param userId 用户id
+     * @param model 模板
+     * @return
+     */
+    @GetMapping("/profile/{userId}")
+    public String getProfilePage(@PathVariable("userId") int userId, Model model) {
+        //查询需要访问的用户
+        User user = userService.getUserById(userId);
+        //判断userId是否存在，不存在则抛出异常
+        if (user == null) {
+            throw new RuntimeException("该用户不存在！");
+        }
+        //用户
+        model.addAttribute("user", user);
+
+        //查询获赞数量
+        int likeCount = likeService.getUserLikeCount(userId);
+        model.addAttribute("likeCount", likeCount);
+
+        return "/site/profile";
     }
 }

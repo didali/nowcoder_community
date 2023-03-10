@@ -5,6 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
@@ -37,11 +38,20 @@ public class RedisTest {
     */
 
         //查看某个key是否存在
-        System.out.println(redisTemplate.hasKey("test:count"));
-        System.out.println(redisTemplate.hasKey("test:user"));
+        //System.out.println(redisTemplate.hasKey("test:count"));
+        //System.out.println(redisTemplate.hasKey("test:user"));
 
         //针对某个key设置过期时间
         //redisTemplate.expire("test:user", 10, TimeUnit.SECONDS);
+
+/*        redisTemplate.opsForValue().set("test", 11);
+
+        //查看所有的key
+        Set keys = redisTemplate.keys("*");
+
+        for (Object key : keys) {
+            System.out.println(key.toString());
+        }*/
 
     }
 
