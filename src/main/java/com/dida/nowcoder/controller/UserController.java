@@ -2,8 +2,10 @@ package com.dida.nowcoder.controller;
 
 import com.dida.nowcoder.annotation.LoginRequired;
 import com.dida.nowcoder.entity.User;
+import com.dida.nowcoder.service.FollowService;
 import com.dida.nowcoder.service.LikeService;
 import com.dida.nowcoder.service.UserService;
+import com.dida.nowcoder.utils.CommunityConstant;
 import com.dida.nowcoder.utils.CommunityUtil;
 import com.dida.nowcoder.utils.HostHolder;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +30,7 @@ import java.io.OutputStream;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController implements CommunityConstant {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -49,6 +51,9 @@ public class UserController {
 
     @Resource
     private LikeService likeService;
+
+    @Resource
+    private FollowService followService;
 
 
     /**
@@ -158,6 +163,21 @@ public class UserController {
         //查询获赞数量
         int likeCount = likeService.getUserLikeCount(userId);
         model.addAttribute("likeCount", likeCount);
+
+        //查询关注数量
+        long followeeCount = followService.getFolloweeCount(userId, ENTITY_TYPE_USER);
+        model.addAttribute("followeeCount", followeeCount);
+
+        //查询粉丝数
+        long followerCount = followService.getFollowerCount(ENTITY_TYPE_USER, userId);
+        model.addAttribute("followerCount", followerCount);
+
+        //是否已关注
+        boolean hasFollowed = false;
+        if (hostHolder.getUser() != null) {
+            hasFollowed = followService.hasFollowed(hostHolder.getUser().getId(), ENTITY_TYPE_USER, userId);
+        }
+        model.addAttribute("hasFollowed", hasFollowed);
 
         return "/site/profile";
     }

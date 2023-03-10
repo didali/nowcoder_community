@@ -10,7 +10,7 @@ function like(btn, entityType, entityId, entityUserId) {
                 $(btn).children("b").text(data.likeStatus==1?'已赞':'赞');
             } else {
                 //请求失败
-                alert(data.msg);
+                window.location.href= CONTEXT_PATH + "/login";
             }
         }
     );

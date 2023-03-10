@@ -44,14 +44,14 @@ public class RedisTest {
         //针对某个key设置过期时间
         //redisTemplate.expire("test:user", 10, TimeUnit.SECONDS);
 
-/*        redisTemplate.opsForValue().set("test", 11);
+        //redisTemplate.opsForValue().set("test", 11);
 
         //查看所有的key
         Set keys = redisTemplate.keys("*");
 
         for (Object key : keys) {
             System.out.println(key.toString());
-        }*/
+        }
 
     }
 

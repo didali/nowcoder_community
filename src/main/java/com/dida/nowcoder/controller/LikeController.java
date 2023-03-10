@@ -1,5 +1,6 @@
 package com.dida.nowcoder.controller;
 
+import com.dida.nowcoder.annotation.LoginRequired;
 import com.dida.nowcoder.entity.User;
 import com.dida.nowcoder.service.LikeService;
 import com.dida.nowcoder.utils.CommunityUtil;
@@ -25,6 +26,9 @@ public class LikeController {
     @ResponseBody
     public String like(int entityType, int entityId, int entityUserId) {
         User user = hostHolder.getUser();
+        if (user == null) {
+            return CommunityUtil.getJSONString(1);
+        }
 
         //点赞
         likeService.like(user.getId(), entityType, entityId, entityUserId);

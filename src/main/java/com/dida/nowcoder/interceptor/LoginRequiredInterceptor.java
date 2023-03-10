@@ -2,11 +2,11 @@ package com.dida.nowcoder.interceptor;
 
 import com.dida.nowcoder.annotation.LoginRequired;
 import com.dida.nowcoder.utils.HostHolder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
 @Component
 public class LoginRequiredInterceptor implements HandlerInterceptor {
 
-    @Autowired
+    @Resource
     private HostHolder hostHolder;
 
     @Override
