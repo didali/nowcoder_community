@@ -33,4 +33,13 @@ public interface UserService {
 
     //修改头像
     public int updateHeader(int userId, String headerUrl);
+
+    //从缓存当中取值
+    User getCache(int userId);
+
+    //初始化缓存数据
+    User initCache(int userId);
+
+    //数据变更的时候清除缓存数据
+    void clearCache(int userId);
 }
