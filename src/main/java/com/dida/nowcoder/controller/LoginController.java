@@ -224,7 +224,7 @@ public class LoginController implements CommunityConstant {
      * @return
      *//*
     public String updatePassword(String email, String password) {
-        userService.updatePassword(email, password);
+        userService.updatePassword( email, password);
         return null;
     }
 

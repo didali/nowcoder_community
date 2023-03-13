@@ -22,6 +22,13 @@ public class LikeController {
     @Resource
     private HostHolder hostHolder;
 
+    /**
+     * 点赞
+     * @param entityType
+     * @param entityId
+     * @param entityUserId
+     * @return
+     */
     @PostMapping("/like")
     @ResponseBody
     public String like(int entityType, int entityId, int entityUserId) {

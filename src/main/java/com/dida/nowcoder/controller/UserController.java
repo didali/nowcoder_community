@@ -181,4 +181,29 @@ public class UserController implements CommunityConstant {
 
         return "/site/profile";
     }
+
+    /**
+     * 修改密码
+     * @return 修改成功之后返回登录页面重新登录
+     */
+    @PostMapping("/updatePassword")
+    public String updatePassword(String oldPassword, String newPassword, String confirmPassword, Model model) {
+/*        User user = hostHolder.getUser();
+
+        if (!oldPassword.equals(user.getPassword())) {
+            model.addAttribute("oldPasswordMsg", "原密码有误！");
+            return "redirect:/user/setting";
+        }
+
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("confirmPassword", "两次输入的新密码不一致");
+            return "redirect:/user/setting";
+        }
+
+        //修改密码
+        userService.updatePassword(user.getId(), newPassword);
+        //修改之后退出登录并且返回登录页面*/
+
+        return "redirect:/user/logout";
+    }
 }

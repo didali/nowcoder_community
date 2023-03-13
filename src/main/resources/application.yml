@@ -28,10 +28,10 @@ spring:
             enable: true
   #配置redis
   redis:
-    host: ENC(K/p4Y5/Wo+ZwbKjVhLopHEX3tPQMvR9NsChXMXXb3IM=)
+    host: 124.221.91.15 #ENC(K/p4Y5/Wo+ZwbKjVhLopHEX3tPQMvR9NsChXMXXb3IM=)
     port: 6379
-    password: ENC(8iomR7fWpOviLrWyczZ2+p7bhhhJQhhSFjf1QGpsjyA=)
-    database: 2
+    password: com.abc.redis.. #ENC(8iomR7fWpOviLrWyczZ2+p7bhhhJQhhSFjf1QGpsjyA=)
+    database: 9
 
 mybatis:
   #设置type搜索包的路径

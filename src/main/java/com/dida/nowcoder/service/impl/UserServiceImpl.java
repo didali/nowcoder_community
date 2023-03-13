@@ -18,10 +18,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -212,17 +209,10 @@ public class UserServiceImpl implements UserService, CommunityConstant {
         return (LoginTicket) redisTemplate.opsForValue().get(redisKey);
     }
 
-    /**
-     * 修改密码
-     * @param email 邮箱
-     * @param password 密码
-     * @return 返回
-     */
-    @Override
-    public int updatePassword(String email, String password) {
-        User user = userMapper.selectByEmail(email);
 
-        return userMapper.updatePassword(user.getId(), password);
+    @Override
+    public int updatePassword(int id, String password) {
+        return updatePassword(id, password);
     }
 
     @Override
@@ -255,4 +245,6 @@ public class UserServiceImpl implements UserService, CommunityConstant {
         String redisKey = RedisKeyUtil.getUserKey(userId);
         redisTemplate.delete(redisKey);
     }
+
+
 }

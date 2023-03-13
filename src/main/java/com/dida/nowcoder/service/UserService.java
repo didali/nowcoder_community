@@ -29,7 +29,7 @@ public interface UserService {
     public LoginTicket getLoginTicket(String ticket);
 
     //修改密码
-    public int updatePassword(String email, String password);
+    public int updatePassword(int id, String password);
 
     //修改头像
     public int updateHeader(int userId, String headerUrl);
