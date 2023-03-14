@@ -1,8 +1,11 @@
 package com.dida.nowcoder.controller;
 
 import com.dida.nowcoder.annotation.LoginRequired;
+import com.dida.nowcoder.entity.Event;
 import com.dida.nowcoder.entity.Page;
 import com.dida.nowcoder.entity.User;
+import com.dida.nowcoder.event.EventConsumer;
+import com.dida.nowcoder.event.EventProducer;
 import com.dida.nowcoder.service.FollowService;
 import com.dida.nowcoder.service.UserService;
 import com.dida.nowcoder.utils.CommunityConstant;
@@ -30,6 +33,12 @@ public class FollowController implements CommunityConstant {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private EventProducer eventProducer;
+
+    @Resource
+    private EventConsumer eventConsumer;
 
     /**
      * 判断当前用户对目标用户的关注状态
@@ -59,8 +68,16 @@ public class FollowController implements CommunityConstant {
         if (user == null) {
             return CommunityUtil.getJSONString(1, "用户未登录");
         }
-
         followService.follow(user.getId(), entityType, entityId);
+
+        //触发关注事件
+        Event event = new Event()
+                .setTopic(TOPIC_FOLLOW)
+                .setUserId(hostHolder.getUser().getId())
+                .setEntityType(entityType)
+                .setEntityId(entityId)
+                .setEntityUserId(entityId);
+        eventProducer.fireEvent(event);
 
         return CommunityUtil.getJSONString(0, "已关注！");
     }

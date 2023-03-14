@@ -58,4 +58,10 @@ public class CommentServiceImpl implements CommentService, CommunityConstant {
         }
         return rows;
     }
+
+    //根据id查询Comment
+    @Override
+    public Comment getCommentById(int id) {
+        return commentMapper.selectCommentById(id);
+    }
 }

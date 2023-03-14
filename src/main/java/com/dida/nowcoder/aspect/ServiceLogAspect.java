@@ -27,6 +27,9 @@ public class ServiceLogAspect {
     public void before(JoinPoint joinPoint) {
         //获取request
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (requestAttributes == null) {
+            return;
+        }
         HttpServletRequest request = requestAttributes.getRequest();
 
         //获取ip地址和当前时间
