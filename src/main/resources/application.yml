@@ -28,10 +28,17 @@ spring:
             enable: true
   #配置redis
   redis:
-    host: 124.221.91.15 #ENC(K/p4Y5/Wo+ZwbKjVhLopHEX3tPQMvR9NsChXMXXb3IM=)
+    host: ENC(K/p4Y5/Wo+ZwbKjVhLopHEX3tPQMvR9NsChXMXXb3IM=) #124.221.91.15
     port: 6379
-    password: com.abc.redis.. #ENC(8iomR7fWpOviLrWyczZ2+p7bhhhJQhhSFjf1QGpsjyA=)
+    password: ENC(8iomR7fWpOviLrWyczZ2+p7bhhhJQhhSFjf1QGpsjyA=) #com.abc.redis..
     database: 9
+  #配置kafka
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: test-consumer-group
+      enable-auto-commit: true #是否自动提交消费者的偏移量
+      auto-commit-interval: 3000 #自动提交的频率，单位毫秒
 
 mybatis:
   #设置type搜索包的路径
