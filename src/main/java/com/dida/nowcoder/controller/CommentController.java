@@ -36,6 +36,7 @@ public class CommentController implements CommunityConstant {
     @Resource
     private DiscussPostService discussPostService;
 
+    //添加评论
     @PostMapping("/add/{discussPostId}")
     public String addComment(@PathVariable("discussPostId") int discussPostId, Comment comment) {
         comment.setUserId(hostHolder.getUser().getId());
@@ -57,7 +58,7 @@ public class CommentController implements CommunityConstant {
             Comment target = commentService.getCommentById(comment.getEntityId());
             event.setEntityUserId(target.getUserId());
         }
-        
+
         eventProducer.fireEvent(event);
 
         return "redirect:/discuss/detail/" + discussPostId;
