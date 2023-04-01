@@ -28,7 +28,7 @@ spring:
             enable: true
   #配置redis
   redis:
-    host: ENC(K/p4Y5/Wo+ZwbKjVhLopHEX3tPQMvR9NsChXMXXb3IM=) #124.221.91.15
+    host: ENC(K/p4Y5/Wo+ZwbKjVhLopHEX3tPQMvR9NsChXMXXb3IM=) #
     port: 6379
     password: ENC(8iomR7fWpOviLrWyczZ2+p7bhhhJQhhSFjf1QGpsjyA=) #com.abc.redis..
     database: 2
