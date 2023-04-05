@@ -24,6 +24,7 @@ public class MailClient {
     private String sendFrom;
 
 
+    //发送
     public void sendMail(String sentTo, String subject, String content) {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
