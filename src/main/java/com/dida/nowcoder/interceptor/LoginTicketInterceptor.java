@@ -24,7 +24,6 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
     private HostHolder hostHolder;
 
     //在请求初通过凭证找到用户，并且将用户暂存到了hostHolder当中
-    //
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //从cookie中获取凭证
