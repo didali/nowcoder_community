@@ -20,6 +20,10 @@
         user_id, title, content, type, status, create_time, comment_count, score
     </sql>
 
+    <delete id="deleteById">
+
+    </delete>
+
     <select id="selectDiscussPost" resultMap="discussPostMapper">
         select <include refid="selectFields"></include>
         from discuss_post

@@ -26,5 +26,5 @@ public interface DiscussPostMapper {
     int updateCommentCount(int id, int commentCount);
 
     //删除帖子
-    //int deleteById(int id);
+    int deleteById(int id);
 }

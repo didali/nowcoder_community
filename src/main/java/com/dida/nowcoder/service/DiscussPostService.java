@@ -20,4 +20,7 @@ public interface DiscussPostService {
 
     //修改帖子评论数量
     public int updateCommentCount(int id, int commentCount);
+
+    //删除帖子
+    public int deleteDiscussPost(int id);
 }
