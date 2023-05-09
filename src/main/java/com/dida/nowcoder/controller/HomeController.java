@@ -33,7 +33,7 @@ public class HomeController implements CommunityConstant {
      * 获取页面评论
      * @param model 模型
      * @param page 分页
-     *
+     * 1
      */
     @GetMapping("/index")
     public String getIndexPage(Model model, Page page) {
