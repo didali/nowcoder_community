@@ -34,7 +34,6 @@ public class HomeController implements CommunityConstant {
      * @param model 模型
      * @param page 分页
      *
-     *
      */
     @GetMapping("/index")
     public String getIndexPage(Model model, Page page) {
