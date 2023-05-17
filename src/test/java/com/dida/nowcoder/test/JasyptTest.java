@@ -11,6 +11,9 @@ public class JasyptTest {
     @Autowired
     private StringEncryptor stringEncryptor;
 
+    /**
+     *
+     */
     @Test
     public void test() {
         String user = this.stringEncryptor.encrypt("");
