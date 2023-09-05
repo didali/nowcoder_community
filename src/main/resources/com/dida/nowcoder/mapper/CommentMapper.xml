@@ -11,7 +11,6 @@
         user_id, entity_type, entity_id, target_id, content, status, create_time
     </sql>
 
-
     <resultMap id="commentMapper" type="comment">
         <result column="user_id" property="userId"/>
         <result column="entity_type" property="entityType"/>

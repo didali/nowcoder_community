@@ -8,15 +8,15 @@ function follow() {
 		// 关注TA
 		$.post (
 			CONTEXT_PATH + "/follow",
-			{"entityType":3,"entityId":$(btn).prev().val()},
-			function (data) {
-				data = $.parseJSON(data);
-				if (data.code==0) {
-					window.location.reload();
-				} else {
-					window.location.href= CONTEXT_PATH + "/login";
-					//alert(data.msg);
-				}
+					{"entityType":3,"entityId":$(btn).prev().val()},
+					function (data) {
+						data = $.parseJSON(data);
+						if (data.code==0) {
+							window.location.reload();
+						} else {
+							window.location.href= CONTEXT_PATH + "/login";
+							//alert(data.msg);
+						}
 			}
 		);
 		//$(btn).text("已关注").removeClass("btn-info").addClass("btn-secondary");
